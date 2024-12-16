@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
@@ -17,6 +17,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.2.0",
     "@observablehq/plot": "^0.6.16",
+    "@rollup/plugin-json": "^6.1.0",
     "d3": "^7.9.0",
     "gh-pages": "^6.2.0",
     "react": "^18.3.1",
