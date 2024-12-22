@@ -12,7 +12,7 @@ export default function Template() {
                 <div>{loc.state.description ? loc.state.description : "No description available."}</div>
                 <div><img style={{marginLeft: "1025px", marginTop: "-75px"}} src={loc.state.image ? loc.state.image : "./deleon-logo.png"} /></div>
             </> : <>
-                <img src="./laughing-cat.gif" />
+                <img src="./skeletal-growth-website/laughing-cat.gif" />
             </>}
         </>
     )
