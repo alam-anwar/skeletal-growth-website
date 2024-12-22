@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import * as d3 from 'd3'
-import { phyloTree } from '../data/TreeStructure'
-import { tree } from '../data/tree.json'
 import { useNavigate } from 'react-router-dom'
 import Slider from '@mui/material/Slider';
+import {phyloTree} from '../data/TreeStructure'
 import Typography from '@mui/material/Typography';
 
 export default function PhyloTreeRadial() {
@@ -19,9 +18,19 @@ export default function PhyloTreeRadial() {
         setRotate(newValue)
     }
 
-    const getTreeData = () => {
-
-    }
+    // const getTreeData = () => {
+    //     fetch('data.json', {
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Accept': 'application/json'
+    //         }
+    //     }).then(function(response) {
+    //         console.log(response)
+    //         return response.json()
+    //     }).then(function(myJSON) {
+    //         console.log(myJSON)
+    //     })
+    // }
 
     useEffect(() => {
         // Specify the chart’s dimensions.
@@ -38,7 +47,7 @@ export default function PhyloTreeRadial() {
             .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth);
 
         // Sort the tree and apply the layout.
-        const root = tree(d3.hierarchy(tree)
+        const root = tree(d3.hierarchy(phyloTree)
             .sort((a, b) => d3.ascending(a.data.name, b.data.name)));
 
         // Creates the SVG container.
