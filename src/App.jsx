@@ -16,11 +16,11 @@ import Template from './components/Template'
 function App() {
     return (
         <>
-            <BrowserRouter>
+            <BrowserRouter basename="/skeletal-growth-website">
                 <Title />
                 <Navbar />
                 <Routes>
-                    <Route exact path='/' element={<Home />} />
+                    <Route path='/' element={<Home />} />
                     <Route path='/phylo-tree' element={<PhyloTreeRadial />} />
                     <Route path='/index' element={<Index />} />
                     <Route path='/about' element={<About />} />
