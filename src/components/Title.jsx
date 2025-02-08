@@ -6,7 +6,7 @@ export default function Title() {
             <img src="deleon-logo.png" />
             <div className="title">
                 <p className="title-skel">Skeletal Growth</p>
-                <p className="title-deleon">DeLeon Lab at the UF Anthropology Department</p>
+                <p className="title-deleon">DeLeon Lab at the UF Department of Anthropology</p>
             </div>
         </div>
     )

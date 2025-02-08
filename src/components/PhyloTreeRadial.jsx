@@ -98,29 +98,32 @@ export default function PhyloTreeRadial() {
             .text(d => d.data.children ? d.data.name : d.parent.data.name + " " + d.data.name)
             .on("click", click);
 
-            // todo: GOAL: make this tree interactive.
-            // todo: user should be able to use their mouse to rotate the tree around the central axis.
-            // todo: navigation functionality shouldn't be affected.
-
         function click(e, d) {
+            console.log(d)
             navigate('/template', {
                 state: {
-                    name: (d => d.data.children ? d.data.name : d.parent.data.name + " " + d.data.name),
+                    name: (d.data.children ? d.data.name : d.parent.data.name + " " + d.data.name),
                     description: d.data.description,
                     image: d.data.image
                 }
             })
         }
+
+        svg.call(d3.drag().on('drag', dragged))
+
+        function dragged(event, d) {
+            var r = {
+                x: event.x,
+                y: event.y
+            }
+            svg.attr("transform", "rotate(" + r.x + ")")
+        }
     }, [])
 
 
     return (
-        <>
-            {/* todo: slider used to rotate the SVG. find a way to rotate using only dragging. */}
-            <div style={{margin: 'auto', width: '50%'}}>
-                <Slider aria-label="Rotation" value={rotate} onChange={handleRotate} max={360} />
-            </div>
-            <div style={{transform: `rotate(${rotate}deg)`}}>
+        <>  
+            <div>
                 <svg ref={svgRef}></svg>
             </div>
         </>
