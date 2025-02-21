@@ -6,7 +6,7 @@ import { Unity, useUnityContext } from 'react-unity-webgl'
 import Title from './components/Title'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './components/Home'
-import PhyloTreeRadial from './components/PhyloTreeRadial' // ! still need to see which one they prefer.
+import PhyloTreeRadial from './components/PhyloTreeRadial'
 import PhyloTreeOrtho from './components/PhyloTreeOrtho'
 import Index from './components/Index'
 import About from './components/About'
