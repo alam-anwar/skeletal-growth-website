@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import Slider from '@mui/material/Slider';
 import {phyloTree} from '../data/TreeStructure'
 import Typography from '@mui/material/Typography';
+import neo4j from 'neo4j-driver'
 
 export default function PhyloTreeRadial() {
 
@@ -11,8 +12,37 @@ export default function PhyloTreeRadial() {
     const svgRef = useRef()
     const [ rotate, setRotate ] = useState(0)
 
-    // todo: nexus file includes 30 most important species.
-    // todo: add new files as necessary.
+    useEffect(() => {
+        async function neo4jConnect() {
+            const URI = 'bolt://localhost:7687/'
+            const USER = 'neo4j'
+            const PASS = 'DeleonLab'
+            let driver
+
+            try {
+                driver = neo4j.driver(URI, neo4j.auth.basic(USER, PASS))
+                const serverInfo = await driver.getServerInfo()
+                console.log("Connection established! :)")
+                console.log(serverInfo)
+            } catch (err) {
+                console.log(`Connection error\n${err}\nCause: ${err.cause}`)
+                await driver.close()
+                return
+            }
+            
+            let { records, summary } = await driver.executeQuery(
+                'MATCH (n) RETURN n',
+                { database: 'neo4j' }
+            )
+
+            console.log(records)
+            console.log(summary)
+            
+            await driver.close()
+        }
+
+        neo4jConnect()
+    }, []);
 
     const handleRotate = (event, newValue) => {
         setRotate(newValue)
