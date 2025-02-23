@@ -31,7 +31,13 @@ export default function PhyloTreeRadial() {
             }
             
             let { records, summary } = await driver.executeQuery(
-                'MATCH (n) RETURN n',
+                `
+                MATCH path=(n)-[:PARENT_OF]->(o)
+                WITH collect(path) AS paths
+                CALL apoc.convert.toTree(paths)
+                YIELD value
+                RETURN value
+                `,
                 { database: 'neo4j' }
             )
 
