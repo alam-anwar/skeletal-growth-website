@@ -34,14 +34,16 @@ export default function PhyloTreeRadial() {
                 `
                 MATCH path=(n)-[:PARENT_OF]->(o)
                 WITH collect(path) AS paths
-                CALL apoc.convert.toTree(paths)
+                CALL apoc.paths.toJsonTree(paths)
                 YIELD value
                 RETURN value
                 `,
                 { database: 'neo4j' }
             )
 
+            console.log("Records: ")
             console.log(records)
+            console.log("Summary: ")
             console.log(summary)
             
             await driver.close()
@@ -53,20 +55,6 @@ export default function PhyloTreeRadial() {
     const handleRotate = (event, newValue) => {
         setRotate(newValue)
     }
-
-    // const getTreeData = () => {
-    //     fetch('data.json', {
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Accept': 'application/json'
-    //         }
-    //     }).then(function(response) {
-    //         console.log(response)
-    //         return response.json()
-    //     }).then(function(myJSON) {
-    //         console.log(myJSON)
-    //     })
-    // }
 
     useEffect(() => {
         // Specify the chart’s dimensions.
