@@ -5,12 +5,14 @@ import Slider from '@mui/material/Slider';
 import {phyloTree} from '../data/TreeStructure'
 import Typography from '@mui/material/Typography';
 import neo4j from 'neo4j-driver'
+import { treeMaker } from '../data/treeMaker';
 
 export default function PhyloTreeRadial() {
 
     const navigate = useNavigate()
     const svgRef = useRef()
     const [ rotate, setRotate ] = useState(0)
+    const [ records, setRecords ] = useState([])
 
     useEffect(() => {
         async function neo4jConnect() {
@@ -45,6 +47,13 @@ export default function PhyloTreeRadial() {
             console.log(records)
             console.log("Summary: ")
             console.log(summary)
+
+            // let modTree = []
+            // for (let order in records) {
+            //     treeMaker(records[order], modTree)
+            // }
+
+            // console.log(modTree)
             
             await driver.close()
         }
@@ -71,7 +80,7 @@ export default function PhyloTreeRadial() {
             .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth);
 
         // Sort the tree and apply the layout.
-        const root = tree(d3.hierarchy(phyloTree)
+        const root = tree(d3.hierarchy(records)
             .sort((a, b) => d3.ascending(a.data.name, b.data.name)));
 
         // Creates the SVG container.
