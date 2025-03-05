@@ -19,7 +19,7 @@ export default function PhyloTreeRadial() {
         async function neo4jConnect() {
             const URI = 'bolt://localhost:7687/'
             const USER = 'neo4j'
-            const PASS = 'DeleonLab'
+            const PASS = 'DeleonLab' // todo: set up .env files for secrets like this.
             let driver
 
             try {
@@ -148,7 +148,7 @@ export default function PhyloTreeRadial() {
                 console.log(d)
                 navigate('/template', {
                     state: {
-                        name: (d.data.children ? d.data.name : d.parent.data.name + " " + d.data.name),
+                        name: d.data.name,
                         description: d.data.description,
                         image: d.data.image
                     }
