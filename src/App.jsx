@@ -21,7 +21,7 @@ function App() {
                 <Navbar />
                 <Routes>
                     <Route path='/' element={<Home />} />
-                    <Route path='/phylo-tree' element={<PhyloTreeRadial />} />
+                    <Route path='/phylo-tree' element={<PhyloTreeOrtho />} />
                     <Route path='/index' element={<Index />} />
                     <Route path='/about' element={<About />} />
                     <Route path='/template' element={<Template />} />

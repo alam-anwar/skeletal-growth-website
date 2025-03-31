@@ -12,14 +12,6 @@ export default function PhyloTreeOrtho() {
     const [dbTree, setDBTree] = useState([])
     const [dbPulled, setDBPulled] = useState(false)
 
-    {/* VERSIONS TO SHOW:
-                - https://observablehq.com/@d3/tree-of-life
-                - https://observablehq.com/@d3/zoomable-sunburst
-                - https://observablehq.com/@d3/cluster/2
-                - https://observablehq.com/@d3/tree/2
-            
-            */}
-
     useEffect(() => {
         async function neo4jConnect() {
             const URI = 'bolt://localhost:7687/'
@@ -58,7 +50,7 @@ export default function PhyloTreeOrtho() {
             }
 
             modTree = modTree.flat(1)
-            console.log(modTree)
+            // console.log(modTree)
             setDBTree(modTree)
             if (dbTree) {
                 setDBPulled(true)
