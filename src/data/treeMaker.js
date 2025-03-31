@@ -1,5 +1,6 @@
 export function treeMaker(obj) {
     const taxonomyLevels = ["Order", "Infraorder", "Level3", "Parvorder", "Family", "GenusSpecies"] 
+    
     // todo: pull from DB to get all taxonomy levels.
     // todo: update list of taxonomy levels if levels change in the future.
 
@@ -23,7 +24,14 @@ export function treeMaker(obj) {
         // for each child:
         for (let child of obj.parent_of) {
             // call treeMaker() on the child node.
-            childrenItems.push(treeMaker(child)); // ! adding node between existing nodes causes issues with children nodes. need to investigate.
+            if (taxonomyLevels.indexOf(child._type) - taxonomyLevels.indexOf(obj._type) > 1) {
+                console.log("Level skip present.")
+                // add an empty level.
+                // how would I do this, though?
+            }
+
+            childrenItems.push(treeMaker(child)); 
+            // ! adding node between existing nodes causes issues with children nodes. need to investigate.
         }
 
         // add the node.
