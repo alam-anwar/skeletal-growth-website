@@ -15,7 +15,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@mui/material": "^6.2.0",
+    "@mui/material": "^6.4.8",
     "@observablehq/plot": "^0.6.16",
     "@rollup/plugin-json": "^6.1.0",
     "d3": "^7.9.0",
@@ -38,6 +38,7 @@
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.11.0",
     "neo4j-driver": "^5.28.1",
+    "react-bootstrap": "^2.10.9",
     "vite": "^5.4.10"
   }
 }
