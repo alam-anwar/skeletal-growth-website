@@ -20,18 +20,43 @@ export function treeMaker(obj) {
         // if there's a gap between child node and parent node (i.e. Order -> Family):
         // add empty objects until the levels are in line with each other.
 
+        console.log(obj.name)
+        console.log(obj.parent_of)
+
         let childrenItems = []
         // for each child:
         for (let child of obj.parent_of) {
             // call treeMaker() on the child node.
-            if (taxonomyLevels.indexOf(child._type) - taxonomyLevels.indexOf(obj._type) > 1) {
-                console.log("Level skip present.")
-                // add an empty level.
-                // how would I do this, though?
-            }
+            let gap = taxonomyLevels.indexOf(child._type) - taxonomyLevels.indexOf(obj._type);
+            if (gap > 1) {
+                let currentLevelIndex = taxonomyLevels.indexOf(obj._type) + 1;
+                let tempParent = { ...obj }; // Create a copy to avoid modifying the original object
+                let rootIntermediateNode = null
 
-            childrenItems.push(treeMaker(child)); 
-            // ! adding node between existing nodes causes issues with children nodes. need to investigate.
+                // Add intermediate levels
+                while (gap > 1) {
+                    let intermediateNode = {
+                        name: null, // Empty name for intermediate levels
+                        _type: taxonomyLevels[currentLevelIndex],
+                        children: []
+                    };
+
+                    if (!rootIntermediateNode) {
+                        rootIntermediateNode = intermediateNode
+                    }
+
+                    tempParent.children = [intermediateNode];
+                    tempParent = intermediateNode;
+                    currentLevelIndex++;
+                    gap--;
+                }
+
+                // Attach the child to the last intermediate node
+                tempParent.children.push(...treeMaker(child)); // Recursively process the child
+                childrenItems.push(rootIntermediateNode);
+            } else {
+                childrenItems.push(...treeMaker(child)); // Recursively process the child
+            }
         }
 
         // add the node.
