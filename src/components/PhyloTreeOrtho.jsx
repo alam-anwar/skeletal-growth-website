@@ -14,9 +14,9 @@ export default function PhyloTreeOrtho() {
 
     useEffect(() => {
         async function neo4jConnect() {
-            const URI = 'bolt://localhost:7687/'
-            const USER = 'neo4j'
-            const PASS = 'DeleonLab' // todo: set up .env files for secrets like this.
+            const URI = process.env.NEO4J_HOST
+            const USER = process.env.NEO4J_USERNAME
+            const PASS = process.env.NEO4J_PASSWORD
             let driver
 
             try {
@@ -50,7 +50,7 @@ export default function PhyloTreeOrtho() {
             }
 
             modTree = modTree.flat(1)
-            // console.log(modTree)
+            console.log(modTree)
             setDBTree(modTree)
             if (dbTree) {
                 setDBPulled(true)
@@ -58,10 +58,6 @@ export default function PhyloTreeOrtho() {
 
             await driver.close()
         }
-
-        // function dummyFunc(fuckYou) {
-        //     console.log(fuckYou)
-        // }
 
         neo4jConnect()
     }, []);
