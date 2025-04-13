@@ -34,7 +34,7 @@ function App() {
                 <Title />
                 <Navbar />
                 <Routes>
-                    <Route path='/home' element={<Home />} />
+                    <Route path='/' element={<Home />} />
                     <Route path='/projects' element={<Projects />} />
                     <Route path='/projects/tooth-jaw' element={<ToothJaw />} />
                     <Route path='/projects/cranial-base' element={<CranialBase />} />

@@ -6,7 +6,7 @@ export default function Navbar() {
     return (
         <>
             <div className="navbar">
-                <Link to="/home">Home</Link>
+                <Link to="/">Home</Link>
                 <div className="dropdown">
                     <button className="dropbtn">Projects</button>
                     <div className="dropdown-content">
