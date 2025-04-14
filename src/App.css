@@ -89,3 +89,8 @@
 .dropdown:hover .dropdown-content {
     display: block
 }
+
+.unity-viewer {
+    width: fit-content;
+    height: auto;
+}
