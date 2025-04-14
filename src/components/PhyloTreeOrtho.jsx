@@ -50,8 +50,13 @@ export default function PhyloTreeOrtho() {
             }
 
             modTree = modTree.flat(1)
-            console.log(modTree)
-            setDBTree(modTree)
+
+            let temp = {
+                name: "",
+                children: [...modTree]
+            }
+
+            setDBTree(temp)
             if (dbTree) {
                 setDBPulled(true)
             }
@@ -71,7 +76,7 @@ export default function PhyloTreeOrtho() {
 
             // Compute the tree height; this approach will allow the height of the
             // SVG to scale according to the breadth (width) of the tree layout.
-            const root = d3.hierarchy(dbTree ? dbTree[0] : phyloTree);
+            const root = d3.hierarchy(dbTree);
             const dx = 10;
             const dy = width / (root.height + 1);
 
