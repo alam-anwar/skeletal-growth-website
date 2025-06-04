@@ -1,0 +1,8 @@
+{
+    "appId": "com.skeletal.growth.website",
+    "appName": "skeletal-growth-website",
+    "bundledWebRuntime": false,
+    "npmClient": "npm",
+    "webDir": "dist",
+    "cordova": {}
+}
