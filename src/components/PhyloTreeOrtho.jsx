@@ -3,68 +3,94 @@ import * as d3 from 'd3'
 import { phyloTree } from '../data/TreeStructure'
 import { useNavigate } from 'react-router-dom'
 import neo4j from 'neo4j-driver'
-import { treeMaker } from '../data/treeMaker'
+import { newTreeMaker } from '../data/treeMaker'
+import { useSQLite } from 'react-sqlite-hook'
+import initSqlJs from "sql.js";
+// import { testDB } from '../data/statements'
 
 export default function PhyloTreeOrtho() {
 
+    let db;
     const svgRef = useRef()
     const navigate = useNavigate()
     const [dbTree, setDBTree] = useState([])
     const [dbPulled, setDBPulled] = useState(false)
+    const [ready, setReady] = useState(false)
+
+    // useEffect(() => {
+    //     async function neo4jConnect() {
+    //         const URI = process.env.NEO4J_HOST
+    //         const USER = process.env.NEO4J_USERNAME
+    //         const PASS = process.env.NEO4J_PASSWORD
+    //         let driver
+
+    //         try {
+    //             driver = neo4j.driver(URI, neo4j.auth.basic(USER, PASS))
+    //             const serverInfo = await driver.getServerInfo()
+    //             console.log("Connection established! :)")
+    //         } catch (err) {
+    //             console.log(`Connection error\n${err}\nCause: ${err.cause}`)
+    //             await driver.close()
+    //             return
+    //         }
+
+    //         const { records, summary } = await driver.executeQuery(
+    //             `
+    //                     MATCH path=(n)-[:PARENT_OF]->(o)
+    //                     WITH collect(path) AS paths
+    //                     CALL apoc.paths.toJsonTree(paths)
+    //                     YIELD value
+    //                     RETURN value
+    //                     `,
+    //             { database: 'neo4j' }
+    //         )
+
+    //         // setDBTree(records)
+
+    //         let modTree = []
+    //         for (let order in records) {
+    //             modTree.push(treeMaker(records[order]._fields[0]))
+    //         }
+
+    //         modTree = modTree.flat(1)
+
+    //         let temp = {
+    //             name: "",
+    //             children: [...modTree]
+    //         }
+
+    //         setDBTree(temp)
+    //         if (dbTree) {
+    //             setDBPulled(true)
+    //         }
+
+    //         await driver.close()
+    //     }
+
+    //     neo4jConnect()
+    // }, []);
 
     useEffect(() => {
-        async function neo4jConnect() {
-            const URI = process.env.NEO4J_HOST
-            const USER = process.env.NEO4J_USERNAME
-            const PASS = process.env.NEO4J_PASSWORD
-            let driver
+        async function SQLiteConnect() {
+            const sqlPromise = await initSqlJs({
+                locateFile: filename => `${window.location.origin}/skeletal-growth-website/assets/sql-wasm.wasm`
+            });
+            console.log('sql.js loaded.')
+    
+            const dataPromise = fetch("/skeletal-growth-website/assets/databases/skeletal-growth.db").then(res => res.arrayBuffer());
+            const [SQL, buf] = await Promise.all([sqlPromise, dataPromise]);
+            db = new SQL.Database(new Uint8Array(buf));
+            console.log('sqlite database loaded.')
 
-            try {
-                driver = neo4j.driver(URI, neo4j.auth.basic(USER, PASS))
-                const serverInfo = await driver.getServerInfo()
-                console.log("Connection established! :)")
-                console.log(serverInfo)
-            } catch (err) {
-                console.log(`Connection error\n${err}\nCause: ${err.cause}`)
-                await driver.close()
-                return
-            }
+            const rows = db.exec("SELECT * FROM species;");
+            const tree = newTreeMaker(rows[0].values);
 
-            const { records, summary } = await driver.executeQuery(
-                `
-                        MATCH path=(n)-[:PARENT_OF]->(o)
-                        WITH collect(path) AS paths
-                        CALL apoc.paths.toJsonTree(paths)
-                        YIELD value
-                        RETURN value
-                        `,
-                { database: 'neo4j' }
-            )
-
-            console.log(records)
-            // setDBTree(records)
-
-            let modTree = []
-            for (let order in records) {
-                modTree.push(treeMaker(records[order]._fields[0]))
-            }
-
-            modTree = modTree.flat(1)
-
-            let temp = {
-                name: "",
-                children: [...modTree]
-            }
-
-            setDBTree(temp)
+            setDBTree(tree);
             if (dbTree) {
-                setDBPulled(true)
+                setDBPulled(true);
             }
-
-            await driver.close()
         }
-
-        neo4jConnect()
+        SQLiteConnect();
     }, []);
 
     useEffect(() => {
@@ -127,7 +153,15 @@ export default function PhyloTreeOrtho() {
                 .attr("transform", d => `translate(${d.y},${d.x})`);
 
             node.append("circle")
-                .attr("fill", d => d.children ? "#555" : "#999")
+                .attr("fill", d => {
+                    if (d.data.description) {
+                        return "#f00"
+                    } else if (d.children) {
+                        return "#555"
+                    } else {
+                        return "#999"
+                    }
+                })
                 .attr("r", 2.5);
 
             node.append("text")
@@ -136,10 +170,10 @@ export default function PhyloTreeOrtho() {
                 .attr("text-anchor", d => d.children ? "end" : "start")
                 .text(d => d.data.name)
                 .attr("stroke", "white")
-                .attr("paint-order", "stroke")
                 .attr("font-size", "11px")
-                .attr("font-color", "red")
-                .attr("font-weight", d => d.data.children ? "normal" : "bold")
+                .attr("background-color", "#ff0000")
+                .attr("font-weight", d => d.data.children.length !== 0 ? "normal" : "bold")
+                .attr("paint-order", "stroke")
                 .on("click", click);
 
 
@@ -161,6 +195,6 @@ export default function PhyloTreeOrtho() {
     return (
         <svg ref={svgRef}>
 
-        </svg>
+        </svg> 
     )
 }

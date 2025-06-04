@@ -5,7 +5,7 @@ import Slider from '@mui/material/Slider';
 import { phyloTree } from '../data/TreeStructure'
 import Typography from '@mui/material/Typography';
 import neo4j from 'neo4j-driver'
-import { treeMaker } from '../data/treeMaker';
+// import { treeMaker } from '../data/treeMaker';
 
 export default function PhyloTreeRadial() {
 
