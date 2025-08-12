@@ -52,7 +52,7 @@ function App() {
                     <Route path='/resources/deleon-lab-resources' element={<DeleonLabResources />} />
                     <Route path='/index' element={<Index />} />
                     <Route path='/about' element={<About />} />
-                    <Route path='/template' element={<Template />} />
+                    <Route path='/species' element={<Template />} />
                 </Routes>
             </BrowserRouter>
 
