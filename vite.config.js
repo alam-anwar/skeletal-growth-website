@@ -21,7 +21,11 @@ export default defineConfig(({ mode }) => {
         plugins: [react()],
         base: "/skeletal-growth-website/",
         server: {
-            port: '7777'
+            port: '7777',
+            cors: true,
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
         },
         build: {
             sourcemap: true
