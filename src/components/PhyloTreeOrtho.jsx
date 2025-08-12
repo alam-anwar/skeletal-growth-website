@@ -5,12 +5,13 @@ import { useNavigate } from 'react-router-dom'
 import neo4j from 'neo4j-driver'
 import { newTreeMaker } from '../data/treeMaker'
 import { useSQLite } from 'react-sqlite-hook'
-import initSqlJs from "sql.js";
+import {db} from '../data/connection'
 // import { testDB } from '../data/statements'
 
 export default function PhyloTreeOrtho() {
 
-    let db;
+    document.title = 'Phylogenetic Tree - Skeletal Growth'
+
     const svgRef = useRef()
     const navigate = useNavigate()
     const [dbTree, setDBTree] = useState([])
@@ -72,15 +73,15 @@ export default function PhyloTreeOrtho() {
 
     useEffect(() => {
         async function SQLiteConnect() {
-            const sqlPromise = await initSqlJs({
-                locateFile: filename => `${window.location.origin}/skeletal-growth-website/assets/sql-wasm.wasm`
-            });
-            console.log('sql.js loaded.')
+            // const sqlPromise = await initSqlJs({
+            //     locateFile: filename => `${window.location.origin}/skeletal-growth-website/assets/sql-wasm.wasm`
+            // });
+            // console.log('sql.js loaded.')
     
-            const dataPromise = fetch("/skeletal-growth-website/assets/databases/skeletal-growth.db").then(res => res.arrayBuffer());
-            const [SQL, buf] = await Promise.all([sqlPromise, dataPromise]);
-            db = new SQL.Database(new Uint8Array(buf));
-            console.log('sqlite database loaded.')
+            // const dataPromise = fetch("/skeletal-growth-website/assets/databases/skeletal-growth.db").then(res => res.arrayBuffer());
+            // const [SQL, buf] = await Promise.all([sqlPromise, dataPromise]);
+            // db = new SQL.Database(new Uint8Array(buf));
+            // console.log('sqlite database loaded.')
 
             const rows = db.exec("SELECT * FROM species;");
             const tree = newTreeMaker(rows[0].values);
@@ -181,13 +182,7 @@ export default function PhyloTreeOrtho() {
             // organism. best way would be to create a template page with basic information about it, 
             // and have the node pass info to the template page.
             function click(e, d) {
-                navigate('/template', {
-                    state: {
-                        name: d.data.name,
-                        description: d.data.description,
-                        image: d.data.image
-                    }
-                })
+                navigate(`/species?id=${d.data.id}`)
             }
         }
     }, [dbPulled])
