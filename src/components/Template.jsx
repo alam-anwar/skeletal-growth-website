@@ -10,6 +10,8 @@ export default function Template() {
     const stmt = db.prepare("SELECT * FROM species WHERE id = :id;");
     const res = stmt.getAsObject({ ':id': id });
 
+    // TODO: abstract viewer into its own component so it can be called from anywhere.
+    // TODO: also come up with functions to make manipulating the viewer easier.
     const { unityProvider, sendMessage } = useUnityContext({
         loaderUrl: "./OsteologyViewerBuild/Build/OsteologyViewerBuild.loader.js",
         dataUrl: "./OsteologyViewerBuild/Build/OsteologyViewerBuild.data",
