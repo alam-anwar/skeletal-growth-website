@@ -10,7 +10,7 @@ import PhyloTreeRadial from './components/PhyloTreeRadial'
 import PhyloTreeOrtho from './components/PhyloTreeOrtho'
 import Index from './components/Index'
 import About from './components/About'
-import Navbar from './components/Navbar'
+import NavDesktop from './components/Navbar'
 import Template from './components/Template'
 import CranialBase from './pages/CranialBase'
 import DeleonLabResources from './pages/DeLeonLabResources'
@@ -26,13 +26,14 @@ import ToothJaw from './pages/ToothJaw'
 import Projects from './pages/Projects'
 import Taxonomy from './pages/Taxonomy'
 import Resources from './pages/Resources'
+import PagesPublications from './pages/PagesPublications'
 
 function App() {
     return (
         <>
             <BrowserRouter basename="/skeletal-growth-website">
-                <Title />
-                <Navbar />
+                {/* <Title /> */}
+                <NavDesktop />
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/projects' element={<Projects />} />
@@ -53,6 +54,7 @@ function App() {
                     <Route path='/index' element={<Index />} />
                     <Route path='/about' element={<About />} />
                     <Route path='/species' element={<Template />} />
+                    <Route path='/resources/publications' element={<PagesPublications />} />
                 </Routes>
             </BrowserRouter>
 
