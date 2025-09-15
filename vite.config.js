@@ -29,6 +29,11 @@ export default defineConfig(({ mode }) => {
         },
         build: {
             sourcemap: true
+        },
+        esbuild: {
+            supported: {
+                'top-level-await': true
+            }
         }
     }
 })
