@@ -188,7 +188,7 @@ export default function PhyloTreeOrtho() {
     }, [dbPulled])
 
     return (
-        <svg ref={svgRef}>
+        <svg className="root-element" ref={svgRef}>
 
         </svg> 
     )

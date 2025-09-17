@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function LearningModules() {
     return (
-        <div>LearningModules</div>
+        <div className='root-element'>LearningModules</div>
     )
 }

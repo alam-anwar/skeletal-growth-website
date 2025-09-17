@@ -2,8 +2,16 @@
     font-family: 'Lato'
 }
 
+body {
+    margin: 0;
+}
+
+.root-element {
+    margin: 0px 8px 0px 8px;
+}
+
 .title-bar {
-    margin-bottom: 20px
+    margin: 0px 0px 20px 0px;
 }
 
 .title-bar img {
@@ -87,7 +95,7 @@
 
 .dropdown-content {
     display: none;
-    float: right;
+    float: left;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
@@ -112,7 +120,7 @@
 
 .dropdown:hover .dropdown-content {
     display: block;
-    float: right;
+    float: left;
 }
 
 .unity-viewer {

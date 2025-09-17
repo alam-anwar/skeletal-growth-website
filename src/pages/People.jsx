@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function People() {
     return (
-        <div>People</div>
+        <div className='root-element'>People</div>
     )
 }

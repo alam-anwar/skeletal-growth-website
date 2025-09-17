@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Taxonomy() {
     return (
-        <div>Taxonomy</div>
+        <div className='root-element'>Taxonomy</div>
     )
 }

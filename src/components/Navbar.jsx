@@ -29,6 +29,7 @@ export default function NavDesktop() {
                         <Link to="/taxonomy/phylogenetic-tree">Phylogenetic Tree</Link>
                     </div>
                 </div>
+                <Link to="/about">About Us</Link>
                 <div className="dropdown dropdown-right">
                     <button className="dropbtn">Resources</button>
                     <div className="dropdown-content">
@@ -38,7 +39,6 @@ export default function NavDesktop() {
                         <Link to="/resources/publications">Pages and Publications</Link>
                     </div>
                 </div>
-                <Link to="/about">About Us</Link>
             </div>
             <div class>
 

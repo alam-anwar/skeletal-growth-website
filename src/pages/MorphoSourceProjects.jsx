@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function MorphoSourceProjects() {
     return (
-        <div>MorphoSourceProjects</div>
+        <div className='root-element'>MorphoSourceProjects</div>
     )
 }

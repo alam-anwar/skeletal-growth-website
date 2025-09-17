@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Resources() {
     return (
-        <div>Resources</div>
+        <div className='root-element'>Resources</div>
     )
 }

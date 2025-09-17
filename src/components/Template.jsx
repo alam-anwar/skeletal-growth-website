@@ -26,7 +26,7 @@ export default function Template() {
     document.title = res.name + ' - Skeletal Growth';
 
     return (
-        <>
+        <div className="root-element">
             <div>
                 <h1>{res.name}</h1>
             </div>
@@ -46,6 +46,6 @@ export default function Template() {
                     <img style={{ maxHeight: '350px', marginLeft: 'auto' }} src={res.image ? res.image : "./deleon-logo.png"} />
                 </div>
             </div>
-        </>
+        </div>
     )
 }
