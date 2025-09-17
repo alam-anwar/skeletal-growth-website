@@ -88,6 +88,10 @@ body {
     transition: 0.25s;
 }
 
+.dropdown-right {
+    float: right;
+}
+
 .navbar a:hover, .dropdown:hover .dropbtn {
     background-color: #f0d15c;
     color: black

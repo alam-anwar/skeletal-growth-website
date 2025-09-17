@@ -32,7 +32,7 @@ export default function NavDesktop() {
                 <Link to="/about">About Us</Link>
                 <div className="dropdown dropdown-right">
                     <button className="dropbtn">Resources</button>
-                    <div className="dropdown-content">
+                    <div className="dropdown-content" style={{right: 0}}>
                         {/* <Link to="/resources/learning-modules">Learning Modules</Link> */}
                         <Link to="/resources/morpho-source-projects">MorphoSource Projects</Link>
                         <Link to="/resources/deleon-lab-resources">DeleonLab Resources</Link>
