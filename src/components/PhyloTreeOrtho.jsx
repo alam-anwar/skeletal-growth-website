@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import neo4j from 'neo4j-driver'
 import { newTreeMaker } from '../data/treeMaker'
 import { useSQLite } from 'react-sqlite-hook'
-import {db} from '../data/connection'
+import { db } from '../data/connection'
 // import { testDB } from '../data/statements'
 
 export default function PhyloTreeOrtho() {
@@ -16,7 +16,7 @@ export default function PhyloTreeOrtho() {
     const navigate = useNavigate()
     const [dbTree, setDBTree] = useState([])
     const [dbPulled, setDBPulled] = useState(false)
-    const [ready, setReady] = useState(false)
+    const [breadcrumbText, setBreadcrumbText] = useState("Hover over the tree to learn more.")
 
     // useEffect(() => {
     //     async function neo4jConnect() {
@@ -77,7 +77,7 @@ export default function PhyloTreeOrtho() {
             //     locateFile: filename => `${window.location.origin}/skeletal-growth-website/assets/sql-wasm.wasm`
             // });
             // console.log('sql.js loaded.')
-    
+
             // const dataPromise = fetch("/skeletal-growth-website/assets/databases/skeletal-growth.db").then(res => res.arrayBuffer());
             // const [SQL, buf] = await Promise.all([sqlPromise, dataPromise]);
             // db = new SQL.Database(new Uint8Array(buf));
@@ -133,6 +133,23 @@ export default function PhyloTreeOrtho() {
                 .attr("viewBox", [-dy / 3, x0 - dx, width, height])
                 .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;");
 
+            svg.append("style").text(`
+
+                .link--active {
+                stroke: #000 !important;
+                stroke-width: 1.5px;
+                }
+
+                .link-extension--active {
+                stroke-opacity: .6;
+                }
+
+                .label--active {
+                font-weight: bold;
+                }
+
+            `);
+
             const link = svg.append("g")
                 .attr("fill", "none")
                 .attr("stroke", "#555")
@@ -163,7 +180,14 @@ export default function PhyloTreeOrtho() {
                         return "#999"
                     }
                 })
-                .attr("r", 2.5);
+                .attr("r", 2.5)
+                .attr("cursor", d => {
+                    if (!d.children) {
+                        return "pointer"
+                    } else {
+                        return "default"
+                    }
+                });
 
             node.append("text")
                 .attr("dy", "0.31em")
@@ -175,7 +199,10 @@ export default function PhyloTreeOrtho() {
                 .attr("background-color", "#ff0000")
                 .attr("font-weight", d => d.data.children.length !== 0 ? "normal" : "bold")
                 .attr("paint-order", "stroke")
-                .on("click", click);
+                .attr("cursor", "pointer")
+                .on("click", click)
+                .on("mouseover", mouseovered(true))
+                .on("mouseout", mouseovered(false));
 
 
             // when clicked, the nodes should display more information about their
@@ -184,12 +211,32 @@ export default function PhyloTreeOrtho() {
             function click(e, d) {
                 navigate(`/species?id=${d.data.id}`)
             }
+
+            function mouseovered(active) {
+                return function (event, d) {
+                    if (active) {
+                        let curr = d
+                        let tempBread = curr.data.name
+                        curr = curr.parent
+
+                        while (curr.parent) {
+                            tempBread = (curr.data.name != "" ? curr.data.name + " > " : "") + tempBread
+                            curr = curr.parent
+                        }
+
+                        setBreadcrumbText(tempBread)
+                    } else {
+                        setBreadcrumbText("Hover over the tree to learn more.")
+                    }
+                }
+            }
         }
     }, [dbPulled])
 
     return (
-        <svg className="root-element" ref={svgRef}>
-
-        </svg> 
+        <div className="root-element">
+            <svg ref={svgRef} />
+            <h1 id="breadcrumbs" style={{textAlign: 'center', marginTop: '20px'}}>{breadcrumbText}</h1>
+        </div>
     )
 }
