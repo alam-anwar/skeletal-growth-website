@@ -27,6 +27,8 @@ import Projects from './pages/Projects'
 import Taxonomy from './pages/Taxonomy'
 import Resources from './pages/Resources'
 import PagesPublications from './pages/PagesPublications'
+import PhyloTreeNew from './components/PhyloTreeNew'
+import TestDebug from './pages/TestDebug'
 
 function App() {
     return (
@@ -55,6 +57,7 @@ function App() {
                     <Route path='/about' element={<About />} />
                     <Route path='/species' element={<Template />} />
                     <Route path='/resources/publications' element={<PagesPublications />} />
+                    <Route path='/debug' element={<TestDebug />} />
                 </Routes>
             </BrowserRouter>
 

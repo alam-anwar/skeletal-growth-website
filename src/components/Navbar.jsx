@@ -1,10 +1,21 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function NavDesktop() {
+    const [debugClickNum, setDebugClickNum] = useState(1)
+    const navigate = useNavigate()
+    
+    const goToDebugPage = () => {
+        setDebugClickNum(debugClickNum + 1);
+        console.log(debugClickNum);
+        if (debugClickNum == 10) {
+            navigate('/debug');
+        }
+    }
+
     return (
         <>
-            <div className="navbar">
+            <div onClick={goToDebugPage} className="navbar">
                 <img src="deleon-logo.png" />
                 <div className="site-title">
                     <h1>Skeletal Growth</h1>
