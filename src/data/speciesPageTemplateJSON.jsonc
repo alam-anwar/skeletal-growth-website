@@ -1,0 +1,36 @@
+{
+    "name": "Cebuella",
+    "mainPicture": "(url)",
+    "mainDescription": "(words)",
+    "stages": [
+        {
+            "name": "Fetus",
+            "description": "(words)",
+            "modelURL": "(url)",
+            // speech bubble that would show up in the corner of the model viewer.
+            // assuming only one speech bubble per model.
+            // if no comment, following line is omitted.
+            "speechBubble": { 
+                "person": "deleon", // we would have a dictionary of everyone and their profile picture.
+                "comment": "I loved working on this model!"
+            }
+        },
+        {
+            "name": "Newborn",
+            // possibly a photo of what the animal looked like at a certain stage? omit if unnecessary.
+            // can potentially implement a slideshow if we want to show multiple photos.
+            "stagePicture": ["(url/path)"],
+            "description": "(words)",
+            "modelURL": "(url)",
+            "speechBubble": { 
+                "person": "anwar",
+                "comment": "This model was really challenging."
+            }
+        },
+        {
+            "name": "Adult",
+            "description": "(words)",
+            "modelURL": "(url)"
+        }
+    ]
+}
