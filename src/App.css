@@ -131,3 +131,36 @@ body {
     width: fit-content;
     height: auto;
 }
+
+table {
+    border: 2px solid black;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10pt;
+    text-align: center;
+}
+
+.toothJawIntro h1 {
+    text-align: center;
+    font-size: 300%;
+}
+
+.toothJawIntro img {
+    margin-left: auto;
+    width: 20%;
+    height: auto;
+    display: flex;
+    vertical-align: middle;
+}
+
+.toothJawIntroText {
+    margin-right: auto;
+    display: inline-flex;
+    flex-basis: auto;
+    padding: 16px;
+    vertical-align: middle;
+    text-align: center;
+    align-items: stretch;
+}
