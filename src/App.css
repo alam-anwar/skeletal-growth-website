@@ -132,14 +132,25 @@ body {
     height: auto;
 }
 
-table {
+.toothJawSamples table {
     border: 2px solid black;
+    margin: 0px auto;
 }
 
-th, td {
+.toothJawSamples th, .toothJawSamples td {
     border: 1px solid black;
-    padding: 10pt;
     text-align: center;
+    padding: 10px
+}
+
+.toothJawMajorFindings td {
+    text-align: center;
+    padding: 0px 100px;
+    vertical-align: top;
+}
+
+.toothJawMajorFindings img {
+    height: 400px;
 }
 
 .toothJawIntro h1 {

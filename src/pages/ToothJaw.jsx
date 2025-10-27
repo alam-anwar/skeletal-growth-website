@@ -5,9 +5,9 @@ export default function ToothJaw() {
         <div className='root-element'>
             <div className="toothJawIntro">
                 <h1>Teeth and Jaws</h1>
-                <div style={{marginLeft: "auto", marginRight: "auto", width: "95%", display: "flex", flexDIrection: "row", flexGrow: '1'}}>
-                    <img src="toothJawMain.png" />
-                    <div className="toothJawIntroText" style={{flexDirection: "column"}}>
+                <div style={{marginLeft: "auto", marginRight: "auto", width: "90%", display: "flex", flexDirection: "row"}}>
+                    <img style={{alignSelf: "center", flex: "1"}} src="toothJawMain.png" />
+                    <div className="toothJawIntroText" style={{flexDirection: "column", flex: "4"}}>
                         <p style={{fontSize: "150%"}}>Biological variation in the vertebrate skull is driven to a large extent by variation in the bones of the jaw. Among primates, some primates have long snouts and some have much flatter faces. This project investigates the important role of developing teeth in directing ossification in the jaws and driving different patterns of growth.</p>
                         <p style={{fontStyle: "italic", fontSize: "110%"}}>Funded by NSF Project "Collaborative Research: Dentofacial development in primates" (BSC-__, __, and __)</p>
                     </div>
@@ -24,7 +24,7 @@ export default function ToothJaw() {
 
             <h2>Sample</h2>
             <p>We are most interested in early growth of teeth and jaws, so we focus on the newborn stage in primates. Older juveniles and adults give us additional information about the trajectories and endpoints of growth. We combine information from conventional CT scans, iodine-stained diceCT scans, and histology to reconstruct the cellular processes and spatial relationships of developing teeth and jaws.</p>
-            <table>
+            <table align="center" className="toothJawSamples" style={{border: "2px solid black"}}>
                 <thead>
                     <tr>
                         <th>Strepsirrhines</th>
@@ -45,17 +45,23 @@ export default function ToothJaw() {
                         <td>Cebuella</td>
                     </tr>
                     <tr>
-                        <td></td>
+                        <td>{/* empty cell. */}</td>
                         <td>Papio</td>
                     </tr>
                 </tbody>
             </table>
 
             <h2>Major Findings</h2>
-            <ul>
-                <li>At the 2025 Anatomy Connected meeting, we documented early- and late-stage osteoblasts in the membranous sacs surrounding tooth germs (Smith et al., 2025). In this mandible of <em>Alouatta seniculus</em>, Runx2+ cells are an indicator of early osteoblast differentiation, and Osterix+ cells indicate late osteoblast differentiation.</li>
-                <li>We also showed that the tooth germ orientation provides a potential mechanism for jaw elongation (prognathism) in newborn primates (DeLeon et al., 2025). In strepsirrhines, expansion of parafollicular soft tissues allow tooth germs to develop in line with their eventual path of eruption. In contrast, in catarrhines, tooth germs develop at an oblique angle and must rotate through development and prior to eruption.</li>
-            </ul>
+            <table className="toothJawMajorFindings">
+                <tr>
+                    <td><img src="majorFinding1.png" /></td>
+                    <td><img src="majorFinding2.png" /></td>
+                </tr>
+                <tr>
+                    <td>At the 2025 Anatomy Connected meeting, we documented early- and late-stage osteoblasts in the membranous sacs surrounding tooth germs (Smith et al., 2025). In this mandible of <em>Alouatta seniculus</em>, Runx2+ cells are an indicator of early osteoblast differentiation, and Osterix+ cells indicate late osteoblast differentiation.</td>
+                    <td>We also showed that tooth germ orientation provides a potential mechanism for jaw elongation (prognathism) in newborn primates (DeLeon et al., 2025). In strepsirrhines, expansion of parafollicular soft tissues allow tooth germs to develop in line with their eventual path of eruption. In contrast, in catarrhines, tooth germs develop at an oblique angle and must rotate through development and prior to eruption.</td>
+                </tr>
+            </table>
 
             <h2>Publications</h2>
             <ul>
