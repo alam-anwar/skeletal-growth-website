@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 export default function NavDesktop() {
     const [debugClickNum, setDebugClickNum] = useState(1)
     const navigate = useNavigate()
-    
+
     const goToDebugPage = () => {
         setDebugClickNum(debugClickNum + 1);
         console.log(debugClickNum);
@@ -15,11 +15,11 @@ export default function NavDesktop() {
 
     return (
         <>
-            <div onClick={goToDebugPage} className="navbar">
-                <img src="deleon-logo.png" />
+            <div className="navbar">
+                <img onClick={goToDebugPage} src="deleon-logo.png" />
                 <div className="site-title">
                     <h1>Skeletal Growth</h1>
-                    <p style={{fontStyle: 'italic'}}>Developmental Mechanisms and Evolutionary History</p>
+                    <p style={{ fontStyle: 'italic' }}>Developmental Mechanisms and Evolutionary History</p>
                 </div>
                 <Link to="/">Home</Link>
                 <div className="dropdown">
@@ -43,7 +43,7 @@ export default function NavDesktop() {
                 <Link to="/about">About Us</Link>
                 <div className="dropdown dropdown-right">
                     <button className="dropbtn">Resources</button>
-                    <div className="dropdown-content" style={{right: 0}}>
+                    <div className="dropdown-content" style={{ right: 0 }}>
                         {/* <Link to="/resources/learning-modules">Learning Modules</Link> */}
                         <Link to="/resources/morpho-source-projects">MorphoSource Projects</Link>
                         <Link to="/resources/deleon-lab-resources">DeleonLab Resources</Link>
