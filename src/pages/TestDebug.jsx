@@ -1,6 +1,6 @@
 import React from 'react'
 import { Unity, useUnityContext } from 'react-unity-webgl'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 export default function TestDebug() {
   const [url, setUrl] = useState("")
@@ -11,6 +11,7 @@ export default function TestDebug() {
     frameworkUrl: "./OsteologyViewerBuild/Build/OsteologyViewerBuild.framework.js",
     codeUrl: "./OsteologyViewerBuild/Build/OsteologyViewerBuild.wasm"
   })
+  const unityRef = useRef(null);
 
   function sendUrlToUnity() {
     sendMessage("Manager", "LoadFromHTML", url);
@@ -20,9 +21,18 @@ export default function TestDebug() {
     setUrl(event.target.value);
   }
 
+  // useEffect(() => {
+  //   if (unityRef.current & unityRef.current.htmlCanvasElementReference) {
+  //     unityRef.current.htmlCanvasElementReference.tabIndex = 1;
+  //   }
+  // }, [unityProvider])
+
+
   return (
     <>
-      <Unity unityProvider={unityProvider} style={{ width: 800, height: 450, pointerEvents: 'none' }} />
+      <div className="viewer-holder">
+        <Unity unityProvider={unityProvider} ref={unityRef} style={{ width: 800, height: 450, contentEditable: false }} />
+      </div>
 
       <div style={{ marginTop: '30px' }}>
         <label>
